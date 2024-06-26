@@ -37,8 +37,32 @@ app.post('/api/v1/signup', async (c) => {
   
 })
 
-app.post('/api/v1/signin', (c) => {
-	return c.text('signin route')
+app.post('/api/v1/signin', async (c) => {
+  const body = await c.req.json();
+  const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate())
+
+  try {
+    const user = await prisma.user.findFirst({
+    where: {
+      username: body.username,
+      password: body.password,
+      }
+    })
+    if (!user) {
+      c.status(403)
+      return c.text('user doesnt exist')   
+    }
+    const jwt = await sign({
+        id: user.id
+      },c.env.JWT_SECRET)  
+
+	return c.text(jwt)  
+  } catch {
+    c.status(411)
+   return c.text('error during user creation ')   
+  }
 })
 
 app.get('/api/v1/blog/:id', (c) => {

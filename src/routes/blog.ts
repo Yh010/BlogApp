@@ -16,38 +16,17 @@ export const blogRouter = new Hono<{
 blogRouter.use("/*", async (c, next) => {
     const authHeader = c.req.header("authorization") || "";
     const user = await verify(authHeader, c.env.JWT_SECRET);
-    if (user && typeof user.id === "string") {
+    
+    if (user) {
+        //@ts-ignore
         c.set("userId", user.id);
-        next();
+        await next();
     } else {
         c.status(403)
         return c.json({
             message: "user not logged in" 
         })
     }
-})
-blogRouter.get('/', async (c) => {
-	const body = await c.req.json();
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
-
-    try {
-        const blog = await prisma.blog.findFirst({
-            where: {
-                id: body.id
-            },
-        })
-
-        return c.json({
-            blog: blog
-        })
-    } catch (e) {
-        return c.json({
-           message:"error while fetching the blog"
-        })
-    }
-    
 })
 
 blogRouter.get('/bulk', async (c) => {
@@ -113,6 +92,30 @@ blogRouter.put('/', async (c) => {
     } catch (e) {
         return c.json({
            message:"error while updating the blog"
+        })
+    }
+    
+})
+
+blogRouter.get('/:id', async (c) => {
+	const id =  c.req.param("id");
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+
+    try {
+        const blog = await prisma.blog.findFirst({
+            where: {
+                id: Number(id)
+            },
+        })
+
+        return c.json({
+            blog: blog
+        })
+    } catch (e) {
+        return c.json({
+           message:"error while fetching the blog"
         })
     }
     

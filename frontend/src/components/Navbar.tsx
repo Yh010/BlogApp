@@ -10,12 +10,13 @@ export const Navbar = () => {
         </div>
         <div>Blog App</div>
       </div>
+
       <div className="flex justify items-center space-x-4">
         <div>
           <PublishButton />
         </div>
         <div>
-          <UserProfileIcon />
+          <UserProfileIcon inputname="users Name" />
         </div>
       </div>
     </div>

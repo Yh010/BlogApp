@@ -11,6 +11,7 @@ export const AllBlogs = () => {
         <div className="w-1/2">
           {allBlogs.map((blog) => (
             <BlogCard
+              id={blog.id}
               authorName={blog.author.name || "Author"}
               blogTitle={blog.title}
               blogDescr={blog.content}

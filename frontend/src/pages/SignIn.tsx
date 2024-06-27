@@ -26,7 +26,7 @@ export const Signin = () => {
       );
       const jwt = response.data;
       localStorage.setItem("token", jwt);
-      navigate("/blog");
+      navigate("/blogs");
     } catch (e) {
       // signup failed alert here
       alert("error while signing in");

@@ -16,7 +16,7 @@ export const BlogCard = ({
   datePublished,
 }: BlogCardItems) => {
   return (
-    <div className="border-t-2 border-b-2 m-4">
+    <div className="border-t-2 border-b-2 m-4 ">
       <div className="flex space-x-2 justify items-center mt-6">
         <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
           <span className="font-medium text-gray-600 dark:text-gray-300">

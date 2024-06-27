@@ -1,18 +1,11 @@
+import { getInitials } from "../UserProfile/hooks/getInitials";
+
 interface BlogCardItems {
   authorName: string;
   blogTitle: string;
   blogDescr: string;
   blogthumbnail?: string;
   datePublished: string;
-}
-
-function getInitials(name: string) {
-  const nameParts = name.trim().split(/\s+/);
-  let initials = "";
-  for (const part of nameParts) {
-    initials += part.charAt(0).toUpperCase();
-  }
-  return initials;
 }
 
 export const BlogCard = ({

@@ -1,7 +1,7 @@
 export const PublishButton = () => {
   return (
     <div>
-      <button className="border rounded-full p-2 bg-green-600 text-white">
+      <button className="border border-black rounded-full px-4 py-2 bg-green-600 text-white">
         Publish
       </button>
     </div>

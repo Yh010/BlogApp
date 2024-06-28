@@ -1,13 +1,15 @@
 import { SignupInput } from "@yh010/blogapp-common";
 import { InputBox } from "../components/signupComponents/inputBox";
 import { SignUpButton } from "../components/signupComponents/SignupButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { CredentialAlert } from "../components/signupComponents/Alert";
 
 export const Signup = () => {
   const navigate = useNavigate();
+  const [alertOn, setalertOn] = useState(false);
   const [postInputs, setpostInputs] = useState<SignupInput>({
     username: "",
     password: "",
@@ -28,10 +30,18 @@ export const Signup = () => {
       localStorage.setItem("token", jwt);
       navigate("/blogs");
     } catch (e) {
-      // signup failed alert here
-      alert("error while signing up");
+      setalertOn(true);
     }
   }
+
+  useEffect(() => {
+    if (alertOn) {
+      const timer = setTimeout(() => {
+        setalertOn(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [alertOn]);
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -39,6 +49,7 @@ export const Signup = () => {
         <div className="flex justify-center items-center mt-20 mb-14 text-2xl">
           Join Blog App
         </div>
+        {alertOn && <CredentialAlert />}
         <InputBox
           placeholder="Username@gmail.com"
           cb={(value) => handleChange("username", value)}

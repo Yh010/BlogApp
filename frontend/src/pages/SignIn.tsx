@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputBox } from "../components/signupComponents/inputBox";
 import { SignUpButton } from "../components/signupComponents/SignupButton";
 import { SigninInput } from "@yh010/blogapp-common";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
-
+import { CredentialAlert } from "../components/signupComponents/Alert";
 export const Signin = () => {
   const navigate = useNavigate();
+  const [alertOn, setalertOn] = useState(false);
   const [postInputs, setpostInputs] = useState<SigninInput>({
     username: "",
     password: "",
@@ -29,13 +30,25 @@ export const Signin = () => {
       navigate("/blogs");
     } catch (e) {
       // signup failed alert here
-      alert("error while signing in");
+      setalertOn(true);
     }
   }
+  useEffect(() => {
+    if (alertOn) {
+      const timer = setTimeout(() => {
+        setalertOn(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [alertOn]);
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="border p-6 rounded-lg shadow-lg">
+      <div className="border p-6 rounded-lg shadow-lg w-1/4">
+        <div className="flex justify-center items-center mt-20 mb-14 text-2xl">
+          Welcome Back
+        </div>
+        {alertOn && <CredentialAlert />}
         <InputBox
           placeholder="Username@gmail.com"
           cb={(value) => handleChange("username", value)}
@@ -49,9 +62,9 @@ export const Signin = () => {
         />
         <SignUpButton cb={sendRequest} text="Sign In" />
         <div className="flex justify-between items-center">
-          <div>Don't have an account ?</div>
+          <div className="m-2 font-thin">Don't have an account ?</div>
           <Link
-            className="border border-black rounded-full px-4 py-2"
+            className="border border-black rounded-full px-4 py-2 hover:bg-lime-500"
             to={"/signup"}
           >
             SignUp

@@ -6,12 +6,14 @@ import { Signup } from "./pages/SignUp";
 import { AllBlogs } from "./pages/AllBlogs";
 import { PublishBlog } from "./pages/PublishBlog";
 import { Navbar } from "./components/Navbar";
+import { LnadingPage } from "./pages/LandingPage";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<LnadingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/blog/:id" element={<Blog />} />

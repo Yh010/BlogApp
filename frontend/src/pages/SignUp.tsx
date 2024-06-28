@@ -35,8 +35,8 @@ export const Signup = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="border p-6 rounded-lg shadow-lg w-1/4 h-3/4">
-        <div className="flex justify-center items-center mt-20 mb-16">
+      <div className="border p-6 rounded-lg shadow-lg w-1/4 ">
+        <div className="flex justify-center items-center mt-20 mb-14 text-2xl">
           Join Blog App
         </div>
         <InputBox
@@ -57,8 +57,11 @@ export const Signup = () => {
         />
         <SignUpButton cb={sendRequest} text="Sign Up" />
         <div className="flex justify-between items-center">
-          <div className="m-2">Already have an account ?</div>
-          <Link className="border rounded-full px-4 py-2" to={"/signin"}>
+          <div className="m-2 font-thin">Already have an account ?</div>
+          <Link
+            className="border border-black rounded-full px-4 py-2 hover:bg-lime-500"
+            to={"/signin"}
+          >
             Signin instead
           </Link>
         </div>

@@ -17,8 +17,11 @@ export const AllBlogs = () => {
     );
   } else {
     return (
-      <div className="mt-4 flex justify-center bg-amber-50">
+      <div className="mt-4 flex justify-center bg-stone-100">
         <div className="w-1/2">
+          <div className="text-slate-950 text-3xl">
+            All blogs at a glance...
+          </div>
           {allBlogs.map((blog) => (
             <BlogCard
               id={blog.id}

@@ -5,14 +5,12 @@ import { UserProfileIcon } from "./UserProfile/UserProfileIcon";
 export const Navbar = () => {
   return (
     <div className="border-b-2 flex justify-between p-4">
-      <div className="flex justify items-center space-x-2">
-        <Link to={"/blogs"}>
-          <div>
-            <img className="h-10 w-10 rounded-full" src={logo} />
-          </div>
-          <div>Blog App</div>
-        </Link>
-      </div>
+      <Link className="flex justify items-center space-x-2" to={"/blogs"}>
+        <div>
+          <img className="h-10 w-10 rounded-full" src={logo} />
+        </div>
+        <div>Blog App</div>
+      </Link>
 
       <div className="flex justify items-center space-x-4">
         <div>

@@ -20,7 +20,7 @@ export const BlogCard = ({
 }: BlogCardItems) => {
   return (
     <Link to={`/blog/${id}`}>
-      <div className="border-t-2 border-b-2 m-4 cursor-pointer">
+      <div className="border border-black hover:border-b-8 hover:border-r-8 p-4 m-4 cursor-pointer">
         <div className="flex space-x-2 justify items-center mt-6">
           <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
             <span className="font-medium text-gray-600 dark:text-gray-300">

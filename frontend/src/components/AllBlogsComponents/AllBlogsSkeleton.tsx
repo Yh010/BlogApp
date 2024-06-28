@@ -2,7 +2,7 @@ export const BlogItemSkeleton = () => {
   return (
     <div
       role="status"
-      className="border-t-2 border-b-2 m-4 cursor-pointer animate-pulse"
+      className="border-t-2 border-b-2 m-4 cursor-pointer animate-pulse "
     >
       <div className="flex space-x-2 justify items-center mt-6">
         <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-200 rounded-full dark:bg-gray-600"></div>

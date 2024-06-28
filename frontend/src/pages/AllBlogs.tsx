@@ -6,7 +6,7 @@ export const AllBlogs = () => {
   const { loading, allBlogs } = useGetAllBlogs();
   if (loading) {
     return (
-      <div className="mt-4 flex justify-center ">
+      <div className="mt-4 flex justify-center bg-amber-50">
         <div className="w-1/2">
           <BlogItemSkeleton />
           <BlogItemSkeleton />
@@ -17,7 +17,7 @@ export const AllBlogs = () => {
     );
   } else {
     return (
-      <div className="mt-4 flex justify-center">
+      <div className="mt-4 flex justify-center bg-amber-50">
         <div className="w-1/2">
           {allBlogs.map((blog) => (
             <BlogCard

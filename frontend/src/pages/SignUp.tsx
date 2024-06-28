@@ -35,12 +35,9 @@ export const Signup = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="border p-6 rounded-lg">
-        <div className="flex justify-between items-center">
-          <div className="m-2">Already have an account ?</div>
-          <Link className="border rounded p-2" to={"/signin"}>
-            Signin instead
-          </Link>
+      <div className="border p-6 rounded-lg shadow-lg w-1/4 h-3/4">
+        <div className="flex justify-center items-center mt-20 mb-16">
+          Join Blog App
         </div>
         <InputBox
           placeholder="Username@gmail.com"
@@ -59,6 +56,12 @@ export const Signup = () => {
           prev={postInputs.name || ""}
         />
         <SignUpButton cb={sendRequest} text="Sign Up" />
+        <div className="flex justify-between items-center">
+          <div className="m-2">Already have an account ?</div>
+          <Link className="border rounded-full px-4 py-2" to={"/signin"}>
+            Signin instead
+          </Link>
+        </div>
       </div>
     </div>
   );

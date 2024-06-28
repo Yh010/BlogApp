@@ -35,7 +35,7 @@ export const Signin = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="border p-6 rounded-lg">
+      <div className="border p-6 rounded-lg shadow-lg">
         <div className="flex justify-between items-center">
           <div>Don't have an account ?</div>
           <Link className="border rounded p-2" to={"/signup"}>

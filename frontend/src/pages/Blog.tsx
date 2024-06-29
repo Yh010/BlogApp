@@ -27,14 +27,16 @@ export const Blog = () => {
           </div>
         </div>
         <div className="w-1/4 p-6">
-          <div className="border-b-2">About the Author</div>
-          <div className="flex">
-            <div className="m-2">
+          <div className="border-b-2 p-6">About the Author</div>
+          <div className="flex mt-6">
+            <div className="mr-6">
               <UserProfileIcon inputname="Authors Name" />
             </div>
             <div>
-              <div>{singleBlog.author.name || "Anon"}</div>
-              <div>Author Desc</div>
+              <div className="font-medium">
+                {singleBlog.author.name || "Anon"}
+              </div>
+              <div className="font-light">Author Desc</div>
             </div>
           </div>
         </div>

@@ -14,13 +14,20 @@ export const Blog = () => {
   } else {
     return (
       <div className="flex h-screen">
-        <div className="w-3/4 border p-6">
-          <div>{singleBlog.title}</div>
-          <div>Blog posted date</div>
-          <div>{singleBlog?.content}</div>
+        <div className="w-3/4 flex justify-center border  p-6">
+          <div className="w-full space-y-6 text-center mt-8 ml-20 mr-14">
+            <div className="text-5xl font-bold text-left">
+              {singleBlog.title}
+            </div>
+            <div className="text-left font-extralight mt-3">
+              Blog posted date
+            </div>
+            <div className="h-6 border-t border-b"></div>
+            <div>{singleBlog?.content}</div>
+          </div>
         </div>
         <div className="w-1/4 p-6">
-          <div className="border-b-2">Author</div>
+          <div className="border-b-2">About the Author</div>
           <div className="flex">
             <div className="m-2">
               <UserProfileIcon inputname="Authors Name" />

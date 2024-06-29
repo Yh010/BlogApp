@@ -6,7 +6,33 @@ import { useNavigate } from "react-router-dom";
 export const PublishBlog = () => {
   const [title, setTitle] = useState("");
   const [desc, setdesc] = useState("");
+  const [posting, setPosting] = useState(false);
   const navigate = useNavigate();
+
+  const handlePost = async () => {
+    setPosting(true);
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/blog`,
+        {
+          title,
+          content: desc,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      setPosting(false);
+      navigate(`/blog/${response.data.id}`);
+    } catch (error) {
+      console.error("Failed to post the blog:", error);
+      setPosting(false);
+      // Handle the error appropriately, e.g., show a notification to the user
+    }
+  };
+
   return (
     <div className=" flex justify-center">
       <div className="m-6 max-w-screen-lg w-full space-y-4">
@@ -33,23 +59,9 @@ export const PublishBlog = () => {
         <button
           type="submit"
           className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-          onClick={async () => {
-            const response = await axios.post(
-              `${BACKEND_URL}/api/v1/blog`,
-              {
-                title,
-                content: desc,
-              },
-              {
-                headers: {
-                  Authorization: localStorage.getItem("token"),
-                },
-              }
-            );
-            navigate(`/blog/${response.data.id}`);
-          }}
+          onClick={handlePost}
         >
-          Post
+          {posting ? "Posting..." : "Post"}
         </button>
       </div>
     </div>

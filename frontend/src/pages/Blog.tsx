@@ -1,3 +1,4 @@
+import { BlogSkeleton } from "../components/AllBlogsComponents/SingleBlogContentSkeleton";
 import { UserProfileIcon } from "../components/UserProfile/UserProfileIcon";
 import { useGetSingleBlog } from "../hooks/getSingleBlog";
 import { useParams } from "react-router-dom";
@@ -7,10 +8,10 @@ export const Blog = () => {
     id: id || "",
   });
   if (!singleBlog) {
-    return <div>loading</div>;
+    return <BlogSkeleton />;
   }
   if (loading) {
-    return <div>loading</div>;
+    return <BlogSkeleton />;
   } else {
     return (
       <div className="flex h-screen">

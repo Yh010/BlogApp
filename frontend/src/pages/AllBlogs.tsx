@@ -30,7 +30,7 @@ export const AllBlogs = () => {
                 authorName={blog.author.name || "Author"}
                 blogTitle={blog.title}
                 blogDescr={blog.content}
-                blogthumbnail={"thumbnail"}
+                /*  blogthumbnail={"thumbnail"} */
                 datePublished="16 Dec"
               />
             ))}

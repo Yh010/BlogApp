@@ -5,7 +5,7 @@ interface BlogCardItems {
   authorName: string;
   blogTitle: string;
   blogDescr: string;
-  blogthumbnail?: string;
+  /* blogthumbnail?: string; */
   datePublished: string;
   id: number;
 }
@@ -14,7 +14,7 @@ export const BlogCard = ({
   authorName,
   blogTitle,
   blogDescr,
-  blogthumbnail,
+  /* blogthumbnail */
   datePublished,
   id,
 }: BlogCardItems) => {

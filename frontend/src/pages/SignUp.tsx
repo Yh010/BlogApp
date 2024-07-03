@@ -10,6 +10,7 @@ import { CredentialAlert } from "../components/signupComponents/Alert";
 export const Signup = () => {
   const navigate = useNavigate();
   const [alertOn, setalertOn] = useState(false);
+  const [signingup, setsigningup] = useState(false);
   const [postInputs, setpostInputs] = useState<SignupInput>({
     username: "",
     password: "",
@@ -21,6 +22,7 @@ export const Signup = () => {
   };
 
   async function sendRequest() {
+    setsigningup(true);
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/user/signup`,
@@ -28,9 +30,11 @@ export const Signup = () => {
       );
       const jwt = response.data;
       localStorage.setItem("token", jwt);
+      setsigningup(false);
       navigate("/blogs");
     } catch (e) {
       setalertOn(true);
+      setsigningup(false);
     }
   }
 
@@ -44,7 +48,7 @@ export const Signup = () => {
   }, [alertOn]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen text-center">
       <div className="border p-6 rounded-lg shadow-lg w-1/4 ">
         <div className="flex justify-center items-center mt-20 mb-14 text-2xl">
           Join Blog App
@@ -55,6 +59,7 @@ export const Signup = () => {
           cb={(value) => handleChange("username", value)}
           prev={postInputs.username}
         />
+        <div className="text-sm">Password length should be atleast 6</div>
         <InputBox
           placeholder="Password"
           cb={(value) => handleChange("password", value)}
@@ -66,7 +71,10 @@ export const Signup = () => {
           cb={(value) => handleChange("name", value)}
           prev={postInputs.name || ""}
         />
-        <SignUpButton cb={sendRequest} text="Sign Up" />
+        <SignUpButton
+          cb={sendRequest}
+          text={signingup ? "Signing Up..." : "Sign Up"}
+        />
         <div className="flex justify-between items-center">
           <div className="m-2 font-thin">Already have an account ?</div>
           <Link

@@ -9,6 +9,7 @@ import { CredentialAlert } from "../components/signupComponents/Alert";
 export const Signin = () => {
   const navigate = useNavigate();
   const [alertOn, setalertOn] = useState(false);
+  const [signingin, setsigningin] = useState(false);
   const [postInputs, setpostInputs] = useState<SigninInput>({
     username: "",
     password: "",
@@ -20,6 +21,7 @@ export const Signin = () => {
   };
 
   async function sendRequest() {
+    setsigningin(true);
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/user/signin`,
@@ -27,10 +29,12 @@ export const Signin = () => {
       );
       const jwt = response.data;
       localStorage.setItem("token", jwt);
+      setsigningin(false);
       navigate("/blogs");
     } catch (e) {
       // signup failed alert here
       setalertOn(true);
+      setsigningin(false);
     }
   }
   useEffect(() => {
@@ -43,7 +47,7 @@ export const Signin = () => {
   }, [alertOn]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen text-center">
       <div className="border p-6 rounded-lg shadow-lg w-1/4">
         <div className="flex justify-center items-center mt-20 mb-14 text-2xl">
           Welcome Back
@@ -54,13 +58,17 @@ export const Signin = () => {
           cb={(value) => handleChange("username", value)}
           prev={postInputs.username}
         />
+        <div className="text-sm">Password length should be atleast 6</div>
         <InputBox
           placeholder="Password"
           cb={(value) => handleChange("password", value)}
           prev={postInputs.password}
           type="password"
         />
-        <SignUpButton cb={sendRequest} text="Sign In" />
+        <SignUpButton
+          cb={sendRequest}
+          text={signingin ? "Signing In..." : "Sign In"}
+        />
         <div className="flex justify-between items-center">
           <div className="m-2 font-thin">Don't have an account ?</div>
           <Link
